@@ -1,11 +1,11 @@
 import "./App.scss";
 import CountersPage from "./CountersPage";
-import WeatherPage from "./WeatherPage";
+// import WeatherPage from "./WeatherPage";
 
 const App = () => {
   return (
     <div className="App">
-      <WeatherPage />
+      {/* <WeatherPage /> */}
       <hr />
       <CountersPage />
     </div>

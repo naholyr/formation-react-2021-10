@@ -42,16 +42,17 @@ const WeatherWidget = ({ cityselected }) => {
   useEffect(() => {
     if (!cityselected) return;
 
-    const url = `https://wttr.in/${cityselected}?format=j1`;
-
+    // const url = `https://wttr.in/${cityselected}?format=j1`;
+    const url = `https://wttr.in/${cityselected}?T`;
     //const controller = new AbortController();
     fetch(url, {
       method: "GET",
       //signal: controller.signal,
     }) // Promise<response>
       .then((response) => response.text()) // Promise<text>
-      .then((text) => {
+      .then((html) => {
         // Succès:
+        const text = extractWeatherTextFromHTML(html);
         setWeatherText({ status: "success", weatherText: text });
       });
   }, [cityselected]);
@@ -64,3 +65,11 @@ const WeatherWidget = ({ cityselected }) => {
 };
 
 export default WeatherWidget;
+
+const extractWeatherTextFromHTML = (html) =>
+  html
+    .replace(/^.*<pre.*?> *(.+) *<\/pre>.*$/ims, "$1")
+    .replace(/&quot;/g, '"')
+    .split("\n")
+    .slice(0, -2)
+    .join("\n");

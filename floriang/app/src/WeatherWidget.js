@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+const delayByCity = {
+  Paris: 3000,
+  Limoges: 2000,
+  "Le Mans": 8000,
+  "Villefranche-sur-Saône": 1000,
+};
+
 const WeatherWidget = ({ city }) => {
   const [{ status, weatherData, error }, setWeatherData] = useState({
     status: "loading",
@@ -7,25 +15,32 @@ const WeatherWidget = ({ city }) => {
 
   useEffect(() => {
     if (!city) return;
-    const url = `https://wttr.in/${city}?format=j1`;
 
+    const url = `https://wttr.in/${city}?T`;
     fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setWeatherData({ status: "success", weatherData: data });
+      .then((response) => response.text())
+      .then((html) => sleep(delayByCity[city]).then(() => html))
+      .then((html) => {
+        const text = extractWeatherTextFromHTML(html);
+        setWeatherData({ status: "success", weatherText: text });
       })
       .catch((error) => {
-        console.error(error);
+        setWeatherData({ status: "error", error: error.message });
       });
   }, [city]);
 
-  if (!city) return null; // Early return
-
-  if (status === "loading") return "Chargement en cours...";
-  if (status === "error") return "Erreur: " + error;
-
-  //   return <pre>{JSON.stringify(weatherData, null, "  ")}</pre>;
-  return weatherData.current_condition[0].lang_fr[0].value;
+  if (!city) return null; // early-return
+  if (status.status === "loading") return "Chargement en cours…";
+  if (status.status === "error") return "Erreur: " + status.error;
+  return <div className="WeatherWidget">{status.weatherText}</div>;
 };
 
 export default WeatherWidget;
+
+const extractWeatherTextFromHTML = (html) =>
+  html
+    .replace(/^.*<pre.*?> *(.+) *<\/pre>.*$/ims, "$1")
+    .replace(/&quot;/g, '"')
+    .split("\n")
+    .slice(0, -2)
+    .join("\n");

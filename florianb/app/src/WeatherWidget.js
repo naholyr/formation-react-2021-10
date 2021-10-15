@@ -26,9 +26,9 @@ const WeatherWidget = ({ city }) => {
     };
   }, [city]);
 
-  // if (!city) return null;
-  // if (loading) return "Chargement en cours";
-  // if (error) return error;
+  if (!city) return null;
+  if (status === "loading") return "Chargement en cours";
+  if (error) return error;
 
   return (
     <div>

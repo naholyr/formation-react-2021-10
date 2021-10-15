@@ -11,7 +11,7 @@ const getRootStyle = () => ({
   backgroundColor: "pink",
 });
 
-class Counter extends React.Component {
+class Counter extends React.PureComponent {
   originalTitle = document.title;
 
   setDocumentTitle() {

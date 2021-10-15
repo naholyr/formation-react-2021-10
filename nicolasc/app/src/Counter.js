@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 // export default expression; // import variable from './path'
 // export const var1 = .....; // import { var1 } from './path'
@@ -39,4 +39,4 @@ const Counter = ({ initialValue = 0 }) => {
   );
 };
 
-export default Counter;
+export default memo(Counter);

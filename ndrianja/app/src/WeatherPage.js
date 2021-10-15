@@ -11,8 +11,9 @@ const WeatherPage = ({ initialCity }) => {
 
   return (
     <div className="WeatherPage">
-      <WeatherWidget city={cityState} /> <br />
       <CitySelector callback={loadMeteo} defaultCity={initialCity} />
+      <br />
+      <WeatherWidget city={cityState} />
     </div>
   );
 };

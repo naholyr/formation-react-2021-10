@@ -2,7 +2,7 @@ import "./App.scss";
 import CounterList from "./CounterList";
 import React, { useState } from "react";
 
-function App() {
+function CountersPage() {
   const [listCounters, updateList] = useState([0, 1, 2]);
   const addCounter = () => {
     updateList([...listCounters, Math.random()]);
@@ -18,7 +18,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="CountersPage">
       <button onClick={addCounter}>Ajouter un compteur</button>
       <button onClick={resetAll} disabled={listCounters.length === 0}>
         Reset all
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default CountersPage;

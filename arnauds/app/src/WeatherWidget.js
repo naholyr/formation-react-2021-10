@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 
 const WeatherWidget = ({ city }) => {
-  const [status, setStatus] = useState({
-    status: "loading",
-  });
+  const [status, setStatus] = useState({});
   useEffect(() => {
     if (!city) return;
     const controller = new AbortController();
@@ -14,7 +12,6 @@ const WeatherWidget = ({ city }) => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         const text = json.nearest_area[0].areaName[0].value;
         const temp = json.current_condition[0].temp_C;
         setStatus({

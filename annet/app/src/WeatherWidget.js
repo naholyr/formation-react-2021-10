@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
+//import "./WeatherWidget.scss";
 //const url = `https://wttr.in/${"Lyon"}?T`;
 
 const WeatherWidget = ({ city }) => {
@@ -16,6 +16,7 @@ const WeatherWidget = ({ city }) => {
   const [status, setStatus] = useState({
     status: "starting",
   });
+  const requestedCityRef = useRef();
   // useEffect(() => {
   //    if ( !city) return null ;
   //    const url = `https://wttr.in/${city}?T`;
@@ -36,10 +37,15 @@ const WeatherWidget = ({ city }) => {
     if (!city) return;
 
     const url = `https://wttr.in/${city}?format=j1`;
+    setStatus({ status: "loading" });
+    requestedCityRef.current = city;
     fetch(url)
       .then((response) => response.text())
-      .then((text) => sleep(delayByCity[city]).then(() => text))
-      .then((text) => {
+      .then((html) => sleep(delayByCity[city]).then(() => html))
+      .then((html) => {
+        //console.log();
+        if (requestedCityRef.current !== city) return;
+        const text = extractWeatherTextFromHTML(html);
         setStatus({ status: "success", weatherText: text });
       })
       .catch((error) => {
@@ -49,7 +55,15 @@ const WeatherWidget = ({ city }) => {
   //city ? "Check weather for " + city : "Weather of  <sélectionner une ville>";
   if (status.status === "loading") return "loading...";
   if (status.status === "error") return "erreur " + status.error;
-  return <pre>{status.weatherText}</pre>;
+  return <div className="WeatherWidget">{status.weatherText}</div>;
 };
 
 export default WeatherWidget;
+
+const extractWeatherTextFromHTML = (html) =>
+  html
+    .replace(/^.*<pre.*?> *(.+) *<\/pre>.*$/ims, "$1")
+    .replace(/&quot;/g, '"')
+    .split("\n")
+    .slice(0, -2)
+    .join("\n");
