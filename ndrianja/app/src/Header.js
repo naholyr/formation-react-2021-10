@@ -1,34 +1,13 @@
-import "./App.scss";
+import NavLink from "./NavLink";
 
-function Header({ onChangePage }) {
-  const handleClick = (page) => (e) => {
-    e.preventDefault();
-    onChangePage(page);
-  };
-
+const Header = () => {
   return (
-    <header className="Header">
-      [
-      <a href="#home" onClick={handleClick("home")}>
-        Home
-      </a>
-      ] | [
-      <a href="#counters" onClick={handleClick("counters")}>
-        Counters
-      </a>
-      ] | [
-      <a href="#weather" onClick={handleClick("weather")}>
-        Weather
-      </a>
-      ]
+    <header className="App">
+      [<NavLink page="home">Home</NavLink>] [
+      <NavLink page="counters">Counters (42 TODO)</NavLink>] [
+      <NavLink page="weather">Weather</NavLink>]
     </header>
   );
-}
+};
 
 export default Header;
-
-/**
-  <WeatherPage initialCity="Paris" />
-      <hr />
-      <CountersPage />
- */

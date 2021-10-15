@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 // export default expression; // import variable from './path'
 // export const var1 = .....; // import { var1 } from './path'
 // export const var2 = .....; // import { var1, var2 as other } from './path'
 
-const getCounterStyle = () => ({
-  display: "flex",
-  flexDirection: "column",
-  backgroundColor: "tomato",
+const getRootStyle = () => ({
+  backgroundColor: "pink",
 });
 
 // function Counter({ initialValue = 0 }) {
@@ -26,24 +24,19 @@ const Counter = ({ initialValue = 0 }) => {
     setValue(currentValue + 1);
   };
 
-  const handleClickDecrement = () => {
-    setValue(currentValue - 1);
-  };
-
   const handleClickReset = () => {
     setValue(initialValue);
   };
 
-  const counterStyle = getCounterStyle();
+  const rootStyle = getRootStyle();
 
   return (
-    <div className="Counter" style={counterStyle}>
+    <div className="Counter" style={rootStyle}>
       <span>{currentValue}</span>
-      <button onClick={handleClickIncrement}>( + )</button>
-      <button onClick={handleClickDecrement}>( - )</button>
-      <button onClick={handleClickReset}>Reset</button>
+      <button onClick={handleClickIncrement}>⬆</button>
+      <button onClick={handleClickReset}>♻</button>
     </div>
   );
 };
 
-export default Counter;
+export default memo(Counter);

@@ -1,22 +1,13 @@
-function Header({ onChangePage }) {
-  const handleClick = (page) => (e) => {
-    onChangePage(page);
-  };
+import NavLink from "./NavLink";
+
+const Header = () => {
   return (
-    <div className="Header">
-      <a href="#home" onClick={handleClick("home")}>
-        Home
-      </a>
-      |
-      <a href="#counters" onClick={handleClick("counter")}>
-        Counters
-      </a>
-      |
-      <a href="#weather" onClick={handleClick("weather")}>
-        WeatherPage
-      </a>
-    </div>
+    <header className="App">
+      [<NavLink page="home">Home</NavLink>] [
+      <NavLink page="counters">Counters (42 TODO)</NavLink>] [
+      <NavLink page="weather">Weather</NavLink>]
+    </header>
   );
-}
+};
 
 export default Header;

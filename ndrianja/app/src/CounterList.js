@@ -1,21 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Counter from "./Counter";
+import { resetArray } from "./store";
 
 const CounterList = ({ initialValue }) => {
-  const [currentValue, setValue] = useState(initialValue);
+  const counterArray = useSelector((state) => state.counterArray);
+  const dispatch = useDispatch();
 
-  const handleCounterIncrement = () => {
-    setValue([Math.random(), ...currentValue]);
+  const handleAddCounter = () => {
+    dispatch(resetArray([Math.random(), ...counterArray]));
   };
 
-  const handleRemove = (index) => {
-    setValue(currentValue.filter((x) => x !== index));
+  const handleRemoveCounter = (index) => {
+    dispatch(resetArray(counterArray.filter((x) => index !== x)));
+  };
+
+  const handleClearCounter = () => {
+    dispatch(resetArray([]));
   };
 
   const renderCounterItem = (index) => {
     return (
       <div key={index}>
-        <Counter initialValue="0" onRemove={() => handleRemove(index)} />
+        <Counter initialValue="0" onRemove={() => handleRemoveCounter(index)} />
       </div>
     );
   };
@@ -29,9 +36,10 @@ const CounterList = ({ initialValue }) => {
 
   return (
     <div className="CounterList">
-      <button onClick={handleCounterIncrement}>Add</button>
+      <button onClick={handleAddCounter}>Add</button>
+      <button onClick={handleClearCounter}>Clear</button>
       <hr />
-      {currentValue.map(renderCounterItem)}
+      {counterArray.map(renderCounterItem)}
     </div>
   );
 };

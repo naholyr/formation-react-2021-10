@@ -3,15 +3,10 @@ import Header from "./Header";
 import Main from "./Main";
 
 const App = () => {
-  const [page, redirect] = useRouting();
-  const handleChangePage = (page) => {
-    redirect(page);
-  };
-
   return (
     <div className="App">
-      <Header onChangePage={handleChangePage} />
-      <Main page={page} />
+      <Header />
+      <Main />
     </div>
   );
 };

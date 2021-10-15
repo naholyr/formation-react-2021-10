@@ -1,16 +1,26 @@
-import "./App.scss";
-import CountersPage from "./CountersPage.js";
+import CountersPage from "./CountersPage";
 import WeatherPage from "./WeatherPage";
 import HomePage from "./HomePage";
+// import { store } from "./store";
+// import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-function Main({ page = "home" }) {
+const pages = {
+  counters: CountersPage,
+  weather: WeatherPage,
+  default: HomePage,
+};
+
+const Main = () => {
+  const page = useSelector((state) => state.page);
+
+  const Page = pages[page] ?? pages.default;
+
   return (
     <main className="Main">
-      {page === "home" && <HomePage />}
-      {page === "weather" && <WeatherPage initialCity="Paris" />}
-      {page === "counters" && <CountersPage />}
+      <Page />
     </main>
   );
-}
+};
 
 export default Main;

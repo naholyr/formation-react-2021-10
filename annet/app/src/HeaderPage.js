@@ -1,27 +1,14 @@
-//import logo from "./logo.svg";
-//import "./App.css";
-//import Counter from "./Counter.js";
-//import CounterList from "./CounterList.js";
-//import React, { useState } from "react";
-
-const HeaderPage = ({ onChangePage }) => {
-  const handleClick = (page) => (e) => {
-    onChangePage(page);
-  };
+import NavLink from "./NavLink";
+import { useSelector } from "react-redux";
+const HeaderPage = () => {
+  //const countersIds = useSelector((state) => state.countersIds);
+  const nbCounters = useSelector((state) => state.counterIds.length);
+  //const nbCounters = countersIds.length;
   return (
     <header className="App">
-      <a href="#home" onClick={handleClick("home")}>
-        {" "}
-        [ Home ]{" "}
-      </a>
-      <a href="#counters" onClick={handleClick("counters")}>
-        {" "}
-        [ Counters(Todo) ]{" "}
-      </a>
-      <a href="#weather" onClick={handleClick("weather")}>
-        [ Weather ]
-      </a>
-      <hr />
+      [<NavLink page="home">Home</NavLink>] [
+      <NavLink page="counters">Counters ( {nbCounters}))</NavLink>] [
+      <NavLink page="weather">Weather</NavLink>]
     </header>
   );
 };

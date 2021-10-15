@@ -1,13 +1,12 @@
-const Header = ({ onClickEvent }) => {
-  const handleClickMenu = (page) => {
-    onClickEvent(page);
-  };
+import NavLink from "./NavLink";
 
+const Header = () => {
   return (
     <header>
       <ul>
-        <li onClick={() => handleClickMenu("weather")}>Weather</li>
-        <li onClick={() => handleClickMenu("counter")}>Counter</li>
+        <NavLink page="home">Home</NavLink>
+        <NavLink page="counter">Counter</NavLink>
+        <NavLink page="weather">Weather</NavLink>
       </ul>
     </header>
   );

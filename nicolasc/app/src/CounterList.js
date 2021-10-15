@@ -1,5 +1,7 @@
-import Counter from "./Counter";
+import ReduxCounter from "./ReduxCounter";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeCounter } from "./store";
 
 /*
 
@@ -27,9 +29,20 @@ Effet externe: document.title = "Toto"
 
 */
 
-const CounterList = ({ counterIndices = [], onRemove }) => {
+const CounterList = () => {
+  const counterIds = useSelector((state) => state.counterIds);
+
   // Side-effect: document.title = nb compteurs
-  const nbCounters = counterIndices.length;
+  const nbCounters = counterIds.length;
+
+  const dispatch = useDispatch();
+
+  const handleClickRemove = (id) => {
+    // const newIndices = counterIds.filter((oldIndex) => oldIndex !== index);
+    // setcounterIds(newIndices);
+    dispatch(removeCounter(id));
+  };
+
   useEffect(() => {
     // Setup
     const originalTitle = document.title;
@@ -65,13 +78,13 @@ const CounterList = ({ counterIndices = [], onRemove }) => {
   const renderCounterItem = (index) => {
     return (
       <li key={index}>
-        <Counter />
-        <button onClick={() => onRemove(index)}>➖</button>
+        <ReduxCounter id={index} />
+        <button onClick={() => handleClickRemove(index)}>➖</button>
       </li>
     );
   };
 
-  return <ul>{counterIndices.map(renderCounterItem)}</ul>;
+  return <ul>{counterIds.map(renderCounterItem)}</ul>;
 };
 
 export default CounterList;

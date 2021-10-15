@@ -1,21 +1,16 @@
 import "./App.scss";
+import NavLink from "./NavLink";
+import { useSelector } from "react-redux";
 
-const Header = ({ onChangePage }) => {
-  const handleLink = (page) => (e) => {
-    onChangePage(page);
-  };
+const Header = () => {
   return (
-    <div className="Header">
-      <a onClick={handleLink("home")} href="#home">
-        [Home]
-      </a>
-      <a onClick={handleLink("counter")} href="#counter">
-        [CounterPage ()]
-      </a>
-      <a onClick={handleLink("weather")} href="#weather">
-        [Météo]
-      </a>
-    </div>
+    <header className="Header">
+      [<NavLink page="home">Home</NavLink>] [
+      <NavLink page="counter">
+        Counter ({useSelector((state) => state.nbCounters)})
+      </NavLink>
+      ] [<NavLink page="weather">Weather</NavLink>]
+    </header>
   );
 };
 

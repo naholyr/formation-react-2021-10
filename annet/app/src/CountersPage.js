@@ -2,13 +2,22 @@
 import "./App.css";
 //import Counter from "./Counter.js";
 import CounterList from "./CounterList.js";
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addCounterBelow,
+  addCounterAbove,
+  resetAllCounters,
+  removeCounter,
+  removeAllCounters,
+} from "./MyStore";
 
 const CountersPage = () => {
-  const counterIndices = [0, 1, 2];
-  const [currentList, setList] = useState(counterIndices);
-
-  const generateId = () => Math.random();
+  //const counterIndices = [0, 1, 2];
+  //const [currentList, setList] = useState(counterIndices);
+  const counterIndices = useSelector((state) => state.counterIds);
+  const dispatch = useDispatch();
+  //const generateId = () => Math.random();
   //const renderCounterItem = (index) => {
   //  return (
   //    <div key={index}>
@@ -17,34 +26,39 @@ const CountersPage = () => {
   //    </div>
   //  );
   //};
-  const addMachinBelow = () => {
-    //const clone = [...currentList, currentList.length + 1];
-    //setList([...currentList, currentList.length + 1]);
-    setList([...currentList, generateId()]);
+  const handleClickAddBelow = () => {
+    //setList([...currentList, generateId()]);
+    dispatch(addCounterBelow());
   };
-  const addMachinAbove = () => {
-    //const clone = [...currentList, currentList.length + 1];
-    //setList([...currentList, currentList.length + 1]);
-    setList([generateId(), ...currentList]);
+
+  const handleClickAddAbove = () => {
+    //setList([generateId(), ...currentList]);
+    dispatch(addCounterAbove());
   };
   const removeAllMachins = () => {
-    setList([]);
+    //setList([]);
+    dispatch(removeAllCounters());
   };
-  const resetAllMachins = () => {
-    setList(currentList.map(() => generateId()));
+  const handleClickResetAll = () => {
+    //setList(currentList.map(() => generateId()));
+    dispatch(resetAllCounters());
   };
-  const removeCounter = (index) => {
-    const newIndices = currentList.filter((oldIndex) => oldIndex !== index);
-    setList(newIndices);
+  const removeSelectedCounter = (index) => {
+    //const newIndices = counterIndices.filter((oldIndex) => oldIndex !== index);
+    //setList(newIndices);
+    dispatch(removeCounter(index));
   };
   return (
     <div className="App">
-      <button onClick={addMachinBelow}>Add new below</button>
-      <button onClick={addMachinAbove}>Add new above</button>
+      <button onClick={handleClickAddBelow}>Add new below</button>
+      <button onClick={handleClickAddAbove}>Add new above</button>
       <button onClick={removeAllMachins}>Remove all</button>
-      <button onClick={resetAllMachins}>Reset all</button>
+      <button onClick={handleClickResetAll}>Reset all</button>
       <hr />
-      <CounterList counterIndices={currentList} onRemove={removeCounter} />
+      <CounterList
+        counterIndices={counterIndices}
+        onRemove={removeSelectedCounter}
+      />
     </div>
   );
 };

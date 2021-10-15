@@ -1,42 +1,15 @@
-const headerStyle = {
-  padding: "20px",
-  width: "100%",
-  boxSizing: "border-box",
-  border: "1px solid black",
-};
+import NavLink from "./NavLink";
+import { useSelector } from "react-redux";
 
-const Header = ({ onChangePage }) => {
-  const onClickLink = (page) => {
-    onChangePage(page);
-  };
+const Header = () => {
+  const counterIndices = useSelector((state) => state.counterIds);
+  const counterNumbers = counterIndices.length;
 
   return (
-    <header className="header" style={headerStyle}>
-      <h2>Header</h2>
-      <a
-        onClick={() => {
-          onClickLink("home");
-        }}
-        href="#home"
-      >
-        Home
-      </a>
-      <a
-        onClick={() => {
-          onClickLink("counters");
-        }}
-        href="#counters"
-      >
-        Counters (42 TODO)
-      </a>
-      <a
-        onClick={() => {
-          onClickLink("weather");
-        }}
-        href="#weather"
-      >
-        Weather
-      </a>
+    <header className="App">
+      [<NavLink page="home">Home</NavLink>] [
+      <NavLink page="counters">Counters {counterNumbers}</NavLink>] [
+      <NavLink page="weather">Weather</NavLink>]
     </header>
   );
 };

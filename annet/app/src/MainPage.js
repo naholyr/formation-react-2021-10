@@ -2,14 +2,15 @@
 import CountersPage from "./CountersPage";
 import WeatherPage from "./WeatherPage";
 import HomePage from "./HomePage";
+import { useSelector } from "react-redux";
 
-const MainPage = ({ page = "home" }) => {
+const MainPage = () => {
+  const page = useSelector((state) => state.page);
+
   return (
     <main className="App">
       {page === "weather" && <WeatherPage />}
-      <hr />
       {page === "counters" && <CountersPage />}
-      <hr />
       {page === "home" && <HomePage />}
     </main>
   );

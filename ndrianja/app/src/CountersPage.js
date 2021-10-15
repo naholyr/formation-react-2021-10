@@ -1,12 +1,12 @@
 import "./App.scss";
 import CounterList from "./CounterList";
 
-function App() {
+const CountersPage = () => {
   return (
     <div className="CountersPage">
       <CounterList initialValue={[]} />
     </div>
   );
-}
+};
 
-export default App;
+export default CountersPage;

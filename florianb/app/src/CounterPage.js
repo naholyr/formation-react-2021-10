@@ -1,30 +1,49 @@
-import "./App.css";
 import { useState } from "react";
 import CounterList from "./CounterList";
+import { useSelector, useDispatch } from "react-redux";
+import { addCounter, removeCounter, resetCounters } from "./store";
 
-const CounterPage = () => {
-  const initialCounterIndices = [1, 2, 3];
-  const [counterIndices, setCounterIndices] = useState(initialCounterIndices);
+const generateId = () => Math.random();
 
-  const addCounter = () => {
-    setCounterIndices([Math.random(), ...counterIndices]);
+const CountersPage = ({ children }) => {
+  // const initialCounterIndices = [];
+  // const [counterIndices, setCounterIndices] = useState(initialCounterIndices);
+
+  const counterIndices = useSelector((state) => state.counterIds);
+  const dispatch = useDispatch();
+
+  const addOneCounter = () => {
+    // setCounterIndices([generateId(), ...counterIndices]);
+    dispatch(addCounter());
   };
 
-  const removeCounter = (index) => {
+  const removeOneCounter = (index) => {
     const newIndices = counterIndices.filter((oldIndex) => oldIndex !== index);
-    setCounterIndices(newIndices);
+    // setCounterIndices(newIndices);
+    dispatch(removeCounter(newIndices));
   };
 
-  const resetCounters = () => {};
+  const resetAllCounters = () => {
+    dispatch(resetCounters());
+    // setCounterIndices(counterIndices.map(() => generateId()));
+  };
 
   return (
-    <div className="counterpage">
-      <button onClick={addCounter}>( + )</button>
-      <button onClick={resetCounters}> Reset </button>
+    <div className="CountersPage">
+      {children}
+      <button onClick={addOneCounter} disabled={counterIndices.length >= 10}>
+        ➕
+      </button>
+      {counterIndices.length > 0 && (
+        <button onClick={resetAllCounters}>♻</button>
+      )}
       <hr />
-      <CounterList counterIndices={counterIndices} onRemove={removeCounter} />
+      <CounterList
+        counterIndices={counterIndices}
+        onRemove={removeOneCounter}
+      />
     </div>
   );
 };
 
-export default CounterPage;
+export default CountersPage;

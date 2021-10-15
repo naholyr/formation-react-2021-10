@@ -1,34 +1,32 @@
-import { useState } from "react";
 import CounterList from "./CounterList";
+import { useSelector, useDispatch } from "react-redux";
+import { addCounter, resetCounters } from "./store";
 
-const generateId = () => Math.random();
+const CountersPage = () => {
+  // const initialCounterIds = [];
+  // const [counterIds, setcounterIds] = useState(initialCounterIds);
+  const nbCounters = useSelector((state) => state.counterIds.length);
 
-const CountersPage = ({ children }) => {
-  const initialCounterIndices = [];
-  const [counterIndices, setCounterIndices] = useState(initialCounterIndices);
+  const dispatch = useDispatch();
 
-  const addCounter = () => {
-    setCounterIndices([generateId(), ...counterIndices]);
+  const handleClickAdd = () => {
+    // setcounterIds([generateId(), ...counterIds]);
+    dispatch(addCounter());
   };
 
-  const removeCounter = (index) => {
-    const newIndices = counterIndices.filter((oldIndex) => oldIndex !== index);
-    setCounterIndices(newIndices);
-  };
-
-  const resetCounters = () => {
-    setCounterIndices(counterIndices.map(() => generateId()));
+  const handleClickReset = () => {
+    // setcounterIds(counterIds.map(() => generateId()));
+    dispatch(resetCounters());
   };
 
   return (
     <div className="CountersPage">
-      {children}
-      <button onClick={addCounter} disabled={counterIndices.length >= 10}>
+      <button onClick={handleClickAdd} disabled={nbCounters >= 10}>
         ➕
       </button>
-      {counterIndices.length > 0 && <button onClick={resetCounters}>♻</button>}
+      {nbCounters > 0 && <button onClick={handleClickReset}>♻</button>}
       <hr />
-      <CounterList counterIndices={counterIndices} onRemove={removeCounter} />
+      <CounterList />
     </div>
   );
 };

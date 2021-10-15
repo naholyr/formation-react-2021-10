@@ -1,22 +1,32 @@
+import "./Main.scss";
+import CountersPage from "./CounterPage";
 import WeatherPage from "./WeatherPage";
-import CounterPage from "./CounterPage";
 import HomePage from "./HomePage";
+// import { store } from "./store";
+// import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-const mainStyle = {
-  padding: "20px",
-  width: "100%",
-  boxSizing: "border-box",
-  border: "1px solid black",
-  marginTop: "20px",
+const pages: Record<string, React$Component> = {
+  counters: CountersPage,
+  weather: WeatherPage,
+  default: HomePage,
 };
 
-const Main = ({ page = "home" }) => {
+const Main = () => {
+  // const [page, setPage] = useState(store.getState().page);
+  // useEffect(() => {
+  //   const unsubscribe = store.subscribe(() => {
+  //     setPage(store.getState().page);
+  //   });
+  //   return unsubscribe;
+  // }, []);
+
+  const page = useSelector((state) => state.page);
+  const PageComponent = pages[page] ?? pages.default;
+
   return (
-    <main className="main" style={mainStyle}>
-      <h2>Main</h2>
-      {page === "home" && <HomePage />}
-      {page === "counters" && <CounterPage />}
-      {page === "weather" && <WeatherPage />}
+    <main className="Main">
+      <PageComponent />
     </main>
   );
 };

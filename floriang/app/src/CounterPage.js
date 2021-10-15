@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import CounterList from "./CounterList";
 
 function App() {

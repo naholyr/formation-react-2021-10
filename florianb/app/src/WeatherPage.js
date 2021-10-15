@@ -1,17 +1,18 @@
+import { useState } from "react";
 import CitySelector from "./CitySelector";
 import WeatherWidget from "./WeatherWidget";
-import { useState } from "react";
 
 const WeatherPage = () => {
   const [city, setCity] = useState();
 
-  const onSelectUpdate = (city) => {
-    setCity(city);
+  // Don't do this at home
+  const handleSelectCity = (selectedCity) => {
+    setCity(selectedCity);
   };
 
   return (
     <div className="WeatherPage">
-      <CitySelector onChange={onSelectUpdate} />
+      <CitySelector onSelectCity={handleSelectCity} />
       <br />
       <WeatherWidget city={city} />
     </div>
