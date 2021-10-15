@@ -3,6 +3,21 @@ import CountersPage from "./CountersPage";
 import WeatherPage from "./WeatherPage";
 import HomePage from "./HomePage";
 
+// function Main() {
+  
+//   return (
+//     <div className="Main">
+//       <WeatherPage />
+//       <hr />
+//       <CountersPage />
+//       <hr />
+//       <HomePage />
+//     </div>
+//   );
+// }
+
+// export default Main;
+
 import { useSelector } from "react-redux";
 
 const pages = {
@@ -32,3 +47,5 @@ const Main = () => {
 };
 
 export default Main;
+
+
