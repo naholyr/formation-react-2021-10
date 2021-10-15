@@ -24,12 +24,17 @@ const Counter = ({ initialValue = 0 }) => {
     setValue(currentValue + 1);
   };
 
+  const handleClickReset = () => {
+    setValue(initialValue);
+  };
+
   const rootStyle = getRootStyle();
 
   return (
     <div className="Counter" style={rootStyle}>
       <span>{currentValue}</span>
       <button onClick={handleClickIncrement}>⬆</button>
+      <button onClick={handleClickReset}>♻</button>
     </div>
   );
 };

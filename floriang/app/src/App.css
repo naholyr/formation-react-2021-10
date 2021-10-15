@@ -1,5 +1,16 @@
+body {
+  background-image: url("https://cdn.wallpapersafari.com/12/93/Ei0zCM.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .App {
   text-align: center;
+  font-family: Helvetica;
+  background-color: white;
+  width: 500px;
+  margin: 50px auto;
+  padding: 20px;
 }
 
 .App-logo {
@@ -35,4 +46,52 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+hr {
+  border: 2px solid black;
+  width: 500px;
+}
+
+.oss117 {
+  width: 200px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 50%;
+}
+
+.counter-container {
+  margin: 20px auto;
+  width: 500px;
+  padding: 20px;
+  background-color: white;
+}
+
+.counter strong {
+  font-family: "Courier New", Courier, monospace;
+}
+
+button {
+  cursor: pointer;
+  -webkit-appearance: none;
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+button.remove {
+  background-color: red;
+}
+
+button.reset {
+  background-color: orange;
+}
+
+button:hover {
+  transition: opacity ease-in-out 0.3s;
+  opacity: 0.7;
 }

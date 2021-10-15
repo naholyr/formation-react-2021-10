@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 const getRootStyle = () => ({
-  backgroundColor: "pink",
+  backgroundColor: "yellow",
+  foregroundColor: "red",
 });
 
 // function Counter({ initialValue = 0 }) {
@@ -17,7 +18,7 @@ const Counter = ({ initialValue = 0 }) => {
   return (
     <div className="Counter" style={rootStyle}>
       <button onClick={handleClickIncrement}> Test me </button>
-      <span>{currentValue}</span>
+      <span> {currentValue} </span>
     </div>
   );
 };

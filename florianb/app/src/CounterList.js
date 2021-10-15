@@ -1,25 +1,53 @@
-import React, { useState } from "react";
 import Counter from "./Counter";
+import { useEffect } from "react";
 
-const CounterList = ({ counterNumbers }) => {
-  const [currentCounterNumbers, setCounterNumbers] = useState(counterNumbers);
+const getCounterListItemStyle = () => ({
+  listStyleType: "none",
+  padding: "0",
+  width: "100%",
+  maxWidth: "300px",
+  margin: "20px auto",
+});
 
-  const renderCounter = () => {
-    return <Counter key={Math.random()} />;
-  };
+const getCounterListStyle = () => ({
+  display: "flex",
+  flexWrap: "wrap",
+  margin: 0,
+  padding: 0,
+});
 
-  const handleAddCounter = () => {
-    setCounterNumbers([
-      ...currentCounterNumbers,
-      currentCounterNumbers.length + 1,
-    ]);
+const CounterList = ({ counterIndices = [], onRemove }) => {
+  const counterListItemStyle = getCounterListItemStyle();
+  const counterListStyle = getCounterListStyle();
+
+  useEffect(() => {
+    const originalColor = document.body.style.backgroundColor;
+    const randomColors = [
+      "tomato",
+      "deeppink",
+      "antiquewhite",
+      "cadetblue",
+      "forestgreen",
+    ];
+    const randomNumber = Math.ceil(Math.random() * 4);
+    const newColor = randomColors[randomNumber];
+    document.body.style.backgroundColor = newColor;
+    return () => {
+      document.body.style.backgroundColor = originalColor;
+    };
+  }, [counterIndices]);
+
+  const renderCounterItem = (index) => {
+    return (
+      <li key={index} style={counterListItemStyle}>
+        <Counter />
+        <button onClick={() => onRemove(index)}>Remove</button>
+      </li>
+    );
   };
 
   return (
-    <div>
-      {currentCounterNumbers.map(renderCounter)}
-      <button onClick={handleAddCounter}>Add counter</button>
-    </div>
+    <ul style={counterListStyle}>{counterIndices.map(renderCounterItem)}</ul>
   );
 };
 

@@ -1,35 +1,15 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Counter from "./Counter";
-import React, { useState } from "react";
+import "./App.scss";
+import CountersPage from "./CountersPage";
+import WeatherPage from "./WeatherPage";
 
-function App() {
-  const counters = [0, 1, 2];
-  const [list, updateList] = useState(counters);
-  const addCounter = () => {
-    updateList([...list, list.length + 1]);
-  };
-  const removeCounter = (index) => {
-    list.splice(index, 1);
-    console.log(list);
-    updateList(list);
-  };
-  const renderCounterItem = (index) => {
-    return (
-      <div>
-        <Counter />
-        <button onClick={() => removeCounter(index)}>remove</button>
-      </div>
-    );
-  };
-
+const App = () => {
   return (
     <div className="App">
-      <button onClick={addCounter}>➕</button>
+      <WeatherPage />
       <hr />
-      {list.map(renderCounterItem)}
+      <CountersPage />
     </div>
   );
-}
+};
 
 export default App;

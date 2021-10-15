@@ -1,30 +1,38 @@
 import React, { useState } from "react";
 
-const Counter = ({ initialValue = 117 }) => {
+const Counter = ({ initialValue }) => {
   const [currentValue, updateValue] = useState(initialValue);
 
   const handleClickIncrement = () => {
     updateValue(currentValue + 1);
   };
 
+  const handleClickDecrement = () => {
+    updateValue(currentValue - 1);
+  };
+
   const handleClickReset = () => {
     updateValue(initialValue);
   };
 
-  const beautifulStyle = {
-    border: "solid blue 1px",
-    margin: "20px auto",
-    width: "500px",
-    padding: "20px",
-  };
-
   return (
-    <div className="counter" style={beautifulStyle}>
+    <div className="counter">
       <h2>
-        Votre numéro est : OSS <strong>{currentValue}</strong>
+        Son matricule est : <strong>OSS {currentValue}</strong>
       </h2>
-      <button onClick={handleClickIncrement}>Augmenter de numéro</button>
-      <button onClick={handleClickReset}>Reset</button>
+      {currentValue !== 117 && (
+        <>
+          <button onClick={handleClickIncrement}>
+            Changer de matricule (+1)
+          </button>
+          <button onClick={handleClickDecrement}>
+            Changer de matricule (-1)
+          </button>
+          <button className="reset" onClick={handleClickReset}>
+            Reset
+          </button>
+        </>
+      )}
     </div>
   );
 };

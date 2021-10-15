@@ -1,12 +1,13 @@
 import "./App.css";
-import CounterList from "./CounterList";
+/*import CountersPage from "./CounterPage";*/
+import WeatherPage from "./WeatherPage";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <CounterList initialCounterIndicies={[]} />
+      <WeatherPage />
     </div>
   );
-}
+};
 
 export default App;

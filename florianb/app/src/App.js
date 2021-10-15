@@ -1,12 +1,19 @@
 import "./App.css";
-import CounterList from "./CounterList";
+// import { useState } from "react";
+// import CounterPage from "./CounterPage";
+import WeatherPage from "./WeatherPage";
 
-function App() {
+const bodyStyle = {
+  backgroundColor: "skyblue",
+  padding: "60px",
+};
+
+const App = () => {
   return (
-    <div className="App">
-      <CounterList counterNumbers={["1", "2", "3"]} />
+    <div className="app" style={bodyStyle}>
+      <WeatherPage />
     </div>
   );
-}
+};
 
 export default App;

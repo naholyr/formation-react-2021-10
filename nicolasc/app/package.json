@@ -9,6 +9,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "sass": "^1.43.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -31,7 +32,7 @@
       ">0.2%",
       "not dead",
       "not op_mini all",
-      "not ie"
+      "not ie >= 0"
     ],
     "development": [
       "last 1 chrome version",

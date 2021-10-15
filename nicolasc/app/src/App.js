@@ -1,20 +1,13 @@
-import "./App.css";
-import { useState } from "react";
-import CounterList from "./CounterList";
+import "./App.scss";
+import CountersPage from "./CounterPage";
+import WeatherPage from "./WeatherPage";
 
 const App = () => {
-  const initialCounterIndices = [];
-  const [counterIndices, setCounterIndices] = useState(initialCounterIndices);
-
-  const addCounter = () => {
-    setCounterIndices([...counterIndices, counterIndices.length + 1]);
-  };
-
   return (
     <div className="App">
-      <button onClick={addCounter}>➕</button>
+      <WeatherPage />
       <hr />
-      <CounterList counterIndices={counterIndices} />
+      <CountersPage />
     </div>
   );
 };

@@ -1,44 +1,43 @@
-import React, { useState } from "react";
 import Counter from "./Counter";
+import { useEffect } from "react";
 
-const CounterList = ({ initialCounterIndicies = [] }) => {
-  const [currentCounterIndicies, updateCounterIndicies] = useState(
-    initialCounterIndicies
-  );
-
-  const currentIndex = currentCounterIndicies.length + 1;
-
-  const handleClickAdd = () => {
-    updateCounterIndicies([...currentCounterIndicies, currentIndex]);
+const CounterList = ({ counterIndicies, onRemoveByIndex }) => {
+  const handleClickRemoveByIndex = (value) => {
+    onRemoveByIndex(value);
   };
 
-  const handleClickRemoveAll = () => {
-    updateCounterIndicies([]);
-  };
+  const originalDocumentTitle = document.title;
 
-  const handleClickRemoveByIndex = () => {
-    updateCounterIndicies(currentCounterIndicies.splice(currentIndex, 1));
-    console.log(currentCounterIndicies);
-    console.log(currentIndex);
-  };
+  /*const newLength = counterIndicies;
+  const previousLength = "????";*/
+  useEffect(() => {
+    /*if (previousLength < newLength) {
+      console.log("oui");
+    }
+    if (previousLength > newLength) {
+      console.log("non");
+    }*/
+    document.title = counterIndicies.length + " agent(s)";
 
-  const renderCounter = () => (
-    <>
-      <Counter initialValue={117} />
-      <button onClick={handleClickRemoveByIndex}>X Retirer cet agent</button>
-    </>
-  );
+    return () => {
+      document.title = originalDocumentTitle;
+    };
+  }, [counterIndicies, originalDocumentTitle]);
+  /*}, [previousLength, newLength]);*/
 
-  return (
-    <>
-      <button onClick={handleClickAdd}>+ Assigner un nouvel agent</button>
-      <button onClick={handleClickRemoveAll}>
-        - Supprimer tous les agents
+  const renderCounter = (index) => (
+    <div className="counter-container" key={index}>
+      <Counter key={index} initialValue={index} />
+      <button
+        className="remove"
+        onClick={() => handleClickRemoveByIndex(index)}
+      >
+        X Retirer cet agent
       </button>
-      <hr />
-      <div>{currentCounterIndicies.map(renderCounter)}</div>
-    </>
+    </div>
   );
+
+  return <>{counterIndicies.map(renderCounter)}</>;
 };
 
 export default CounterList;

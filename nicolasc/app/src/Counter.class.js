@@ -1,10 +1,56 @@
 import React from "react";
 
+function noop() {}
+const connectWebsocket = noop;
+const disconnectWebsocket = noop;
+const setup = noop;
+const cleanup = noop;
+const condition = true;
+
 const getRootStyle = () => ({
   backgroundColor: "pink",
 });
 
 class Counter extends React.Component {
+  originalTitle = document.title;
+
+  setDocumentTitle() {
+    document.title = `Value = ${this.state.value}`;
+  }
+
+  restoreDocumentTitle() {
+    document.title = this.originalTitle;
+  }
+
+  componentDidMount() {
+    console.log("Counter#didMount");
+    this.setDocumentTitle();
+    connectWebsocket(this.props.channel);
+    setup();
+  }
+
+  componentWillUnmount() {
+    console.log("Counter#willUnmount");
+    this.restoreDocumentTitle();
+    disconnectWebsocket(this.props.channel);
+    cleanup();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Counter#didUpdate", prevState, "=>", this.state);
+    if (prevState.value !== this.state.value) {
+      this.setDocumentTitle();
+    }
+    if (prevProps.channel !== this.props.channel) {
+      disconnectWebsocket(prevProps.channel);
+      connectWebsocket(this.props.channel);
+    }
+    if (condition) {
+      cleanup();
+      setup();
+    }
+  }
+
   /*
   constructor(props) {
     super(props);

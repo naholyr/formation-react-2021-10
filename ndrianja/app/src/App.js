@@ -1,10 +1,13 @@
-import "./App.css";
-import CounterList from "./CounterList";
+import "./App.scss";
+import CountersPage from "./CountersPage.js";
+import WeatherPage from "./WeatherPage";
 
 function App() {
   return (
     <div className="App">
-      <CounterList initialValue={[]} />
+      <WeatherPage initialCity="Paris" />
+      <hr />
+      <CountersPage />
     </div>
   );
 }
