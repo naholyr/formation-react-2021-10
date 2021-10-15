@@ -1,13 +1,18 @@
 import "./App.scss";
-import CountersPage from "./CountersPage";
-// import WeatherPage from "./WeatherPage";
+import Main from "./Main";
+import Header from "./Header";
+import React, { useState } from "react";
 
 const App = () => {
+  const [page, setPage] = useState("home");
+  const handleChangePage = (page) => {
+    setPage(page);
+  };
   return (
     <div className="App">
-      {/* <WeatherPage /> */}
+      <Header onChangePage={handleChangePage} />
       <hr />
-      <CountersPage />
+      <Main page={page} />
     </div>
   );
 };

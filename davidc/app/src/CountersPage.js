@@ -1,4 +1,3 @@
-import "./App.scss";
 import Counter2 from "./Counter2";
 import { useState, useEffect } from "react";
 

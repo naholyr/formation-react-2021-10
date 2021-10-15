@@ -9,7 +9,7 @@ const delayByCity = {
 };
 
 const WeatherWidget = ({ city }) => {
-  const [{ status, weatherData, error }, setWeatherData] = useState({
+  const [{ status, weatherText, error }, setWeatherData] = useState({
     status: "loading",
   });
 
@@ -32,7 +32,7 @@ const WeatherWidget = ({ city }) => {
   if (!city) return null; // early-return
   if (status.status === "loading") return "Chargement en cours…";
   if (status.status === "error") return "Erreur: " + status.error;
-  return <div className="WeatherWidget">{status.weatherText}</div>;
+  return <div className="WeatherWidget">{weatherText}</div>;
 };
 
 export default WeatherWidget;

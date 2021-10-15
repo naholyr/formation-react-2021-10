@@ -3,7 +3,7 @@ import CounterList from "./CounterList";
 
 const generateId = () => Math.random();
 
-const CountersPage = () => {
+const CountersPage = ({ children }) => {
   const initialCounterIndices = [];
   const [counterIndices, setCounterIndices] = useState(initialCounterIndices);
 
@@ -22,6 +22,7 @@ const CountersPage = () => {
 
   return (
     <div className="CountersPage">
+      {children}
       <button onClick={addCounter} disabled={counterIndices.length >= 10}>
         ➕
       </button>

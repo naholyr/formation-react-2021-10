@@ -1,21 +1,39 @@
-import { useEffect, useState } from "react";
-import "./App.scss";
-import CountersPage from "./CounterPage";
-import WeatherPage from "./WeatherPage";
+import { useState } from "react";
+import Header from "./Header";
+import Main from "./Main";
 
 const App = () => {
-  const [visibleWeather, toggleVisibleWeather] = useState(false);
-  useEffect(() => {
-    setTimeout(() => toggleVisibleWeather(false), 6000);
-  }, []);
+  const [page, redirect] = useRouting();
+  const handleChangePage = (page) => {
+    redirect(page);
+  };
 
   return (
     <div className="App">
-      {visibleWeather && <WeatherPage />}
-      <hr />
-      <CountersPage />
+      <Header onChangePage={handleChangePage} />
+      <Main page={page} />
     </div>
   );
+};
+
+const useRouting = (defaultPage = "home") => {
+  const getFromHash = () => {
+    const hash = document.location.hash?.substring(1);
+    return hash ?? defaultPage;
+  };
+
+  const [page, setPage] = useState(getFromHash);
+
+  const redirect = (page) => {
+    document.location.hash = page;
+    setPage(page);
+  };
+
+  window.addEventListener("hashchange", () => {
+    setPage(getFromHash());
+  });
+
+  return [page, redirect];
 };
 
 export default App;

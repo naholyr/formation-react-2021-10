@@ -8,9 +8,21 @@ body {
   text-align: center;
   font-family: Helvetica;
   background-color: white;
-  width: 500px;
+  width: 600px;
   margin: 50px auto;
   padding: 20px;
+}
+
+header {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  cursor: pointer;
 }
 
 .App-logo {

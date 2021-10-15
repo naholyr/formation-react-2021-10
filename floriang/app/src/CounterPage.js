@@ -27,7 +27,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <h1>Florian G. (OSS' Generator)</h1>
       <img
         src="https://i1.sndcdn.com/artworks-000629410873-v5yzxd-t500x500.jpg"

@@ -5,37 +5,6 @@
 import { useState, useEffect } from "react";
 // const url = `https://wttr.in/${"Lyon"}?T`;
 
-// // Démarrer la requête:
-// const controller = new AbortController();
-// fetch(url, {
-//   method: "GET",
-//   signal: controller.signal,
-// }) // Promise<response>
-//   .then((response) => response.text()) // Promise<text>
-//   .then((text) => {
-//     // Succès:
-//     console.log("Response body", text);
-//   })
-//   .catch((err) => {
-//     if (err.name === "AbortError") {
-//       // Requête annulée
-//     } else {
-//       // Erreur:
-//       console.error("Error", err.name);
-//     }
-//   });
-
-// // Abandonner la requête:
-// controller.abort();
-
-// const WeatherWidget = ({ city }) => {
-//   if (!city) return null;
-//   // const imgUrl = `https://wttr.in/${encodeURIComponent(city)}.png`;
-//   // <img src={imgUrl} alt={`Météo de ${city}`} />
-//   const weatherText = `TODO call https://wttr.in/${city}?T`;
-//   return <pre>{weatherText}</pre>;
-// };
-
 const WeatherWidget = ({ cityselected }) => {
   const [status, setWeatherText] = useState({ status: "loading" });
 

@@ -1,13 +1,11 @@
-import "./App.scss";
-import CountersPage from "./CountersPage";
-import WeatherPage from "./WeatherPage";
+import Main from "./Main";
+import Header from "./Header";
 
 function App() {
   return (
     <div className="App">
-      <WeatherPage />
-      <hr />
-      <CountersPage />
+      <Header />
+      <Main />
     </div>
   );
 }

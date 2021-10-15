@@ -22,7 +22,11 @@ const WeatherWidget = ({ city }) => {
   if (!city) return null;
   if (status.status === "loading") return "Loading...";
   if (status.status === "loading") return "Error..." + status.error;
-  return <div className="WeatherWidget">{status.weatherText}</div>;
+  return (
+    <div className="WeatherWidget">
+      <pre>{status.weatherText}</pre>
+    </div>
+  );
 };
 
 const useWeather = (city) => {

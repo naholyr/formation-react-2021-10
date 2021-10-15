@@ -10,7 +10,7 @@ const WeatherPage = () => {
   };
 
   return (
-    <div className="WeatherPage">
+    <div className="app">
       <CitySelector onChangeEvent={onChangeCity} />
       <br />
       <WeatherWidget city={currentCity} />

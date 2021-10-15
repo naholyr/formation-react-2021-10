@@ -1,11 +1,19 @@
 import "./App.css";
-/*import CountersPage from "./CounterPage";*/
-import WeatherPage from "./WeatherPage";
+import { useState } from "react";
+import Header from "./Header";
+import Main from "./Main";
 
 const App = () => {
+  const [currentPage, setPage] = useState("default");
+
+  const onClickEvent = (page) => {
+    setPage(page);
+  };
+
   return (
-    <div className="App">
-      <WeatherPage />
+    <div className="app">
+      <Header onClickEvent={onClickEvent} />
+      <Main page={currentPage} />
     </div>
   );
 };
